@@ -5,11 +5,11 @@ from calendar_funcs import get_workdays, get_all_days, get_not_workdays
 
 def plot_range(path, start_date, end_date, **kwargs):
     df = make_df(path)
-    
+
     workdays = get_workdays(start_date, end_date)
     all_days = get_all_days(start_date, end_date)
     not_workdays = get_not_workdays(start_date, end_date)
-    
+
     for day in all_days:
         plt.subplot(131)
         plt.plot(df[day].index.hour,
@@ -17,7 +17,7 @@ def plot_range(path, start_date, end_date, **kwargs):
         plt.xlim([0, 23])
     plt.xlabel("Hour of the day")
     plt.ylabel("Load profile")
-    
+
     for day in workdays:
         plt.subplot(132)
         plt.plot(df[day].index.hour,
@@ -27,7 +27,7 @@ def plot_range(path, start_date, end_date, **kwargs):
         plt.ylabel("Load profile")
 
     plt.title(path.split("/")[-1] + " (all, working, weekends)", fontsize = 20)
-    
+
     for day in not_workdays:
         plt.subplot(133)
         plt.plot(df[day].index.hour,
@@ -40,10 +40,10 @@ def plot_range(path, start_date, end_date, **kwargs):
         save_path = folder + kwargs["output_folder"]
         if not os.path.exists(save_path):
             os.makedirs(save_path)
-        plt.savefig(save_path + "/" + file_input.split(".")[0] + "_loads.png")
-        
+        plt.savefig(f"{save_path}/" + file_input.split(".")[0] + "_loads.png")
+
     plt.rcParams["figure.figsize"] = (50,8)
-    
+
     return plt.show()
 
 def plot_day(df, days, line_color="blue"):

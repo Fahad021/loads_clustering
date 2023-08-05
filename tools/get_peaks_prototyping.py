@@ -28,16 +28,13 @@ def get_peaks(column):
     #plt.subplot(122)
     #plt.plot(x, y)
     plt.show()
-    #peakutils.indexes(column, thres=0.6, min_dist=3)
-    #signal.argrelmax(y, order = 2)
-    peaks = peakutils.indexes(column, thres=0.35, min_dist=3)
-    return peaks
+    return peakutils.indexes(column, thres=0.35, min_dist=3)
 
+threshold = 0.3
 for file in files:
     column = make_building_model(folder, file)["Electricity:Facility [kW](Hourly)"]
-    peaks = get_peaks(column) 
+    peaks = get_peaks(column)
     print(peaks)
     #print("n peaks = ", len(maxs[0]))
     print("n peaks = ", len(peaks))
-    threshold = 0.3
     print("--------------------------------------------------------------")

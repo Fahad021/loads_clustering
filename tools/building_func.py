@@ -11,4 +11,4 @@ def get_building_city(filename):
     if "RefBldg" in filename:
         return filename.split(get_building_state(filename))[1][1:-4]
     else:
-        return ", ".join(filename.split("_")[2].split(".")[0:-2])
+        return ", ".join(filename.split("_")[2].split(".")[:-2])
